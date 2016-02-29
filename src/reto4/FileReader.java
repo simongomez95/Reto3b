@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class FileReader {
 
-    private static String fileName = "C:\\Users\\lope\\Desktop\\Computer-Graphics-master\\Reto3b\\objeto.txt";
+    private static String fileName = "objeto.txt";
     private String line = null;
 
     private File file;
