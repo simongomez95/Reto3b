@@ -3,6 +3,7 @@ package reto4;
 import reto3b.Punto2Dh;
 
 import java.io.*;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import java.util.List;
  */
 public class FileReader {
 
-    private static String fileName = "objeto.txt";
+
+    private static URL url = Main.class.getResource("objeto.txt");
+    private static String fileName = url.getPath();
     private String line = null;
 
     private File file;
