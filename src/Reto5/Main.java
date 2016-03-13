@@ -1,13 +1,13 @@
 package Reto5;
 
 import reto3b.*;
-import reto4.FileReader;
+import reto4.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,6 +23,9 @@ public class Main extends JPanel implements KeyListener{
     int xO = 50;
     int yO = 30;
 
+    private int d= 50;
+    private double[][] projectMatrix = new ProjectionTransformer().apply(d);
+
     FileReader fileReader = new FileReader();
 
     List<Punto3Dh> puntosF = fileReader.getPuntos();
@@ -33,10 +36,15 @@ public class Main extends JPanel implements KeyListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
+        g.setColor(Color.black);
+        g.fillRect(0, 0, getWidth(), getHeight());
 
-        dibujarObjeto(g2d);
+        g.setColor(Color.green);
+        dibujarObjeto(g);
+
     }
+
+
 
     /*public void transformar(){
         for(int i = 0; i < puntosF.size();i++){
@@ -122,16 +130,15 @@ public class Main extends JPanel implements KeyListener{
 
         //transformar();
 
+        // THIS IS UTTER SHIT (for the moment) AND SHOULD NOT BE TAKEN SERIOUSLY
         for (int[] arista : aristasF) {
 
 
-            x0 = (int) puntos.get(arista[0]).getX();
-            y0 = (int) puntos.get(arista[0]).getY();
-            x1 = (int) puntos.get(arista[1]).getX();
-            y1 = (int) puntos.get(arista[1]).getY();
+            // referencia Point point1 = new Point(Util.multiply(projectMatrix, points[i].toMatrix()));
+            Point point1 = new Point(new Matriz3D().mult(matrizproyecto, puntosF.get(arista[0]))); //matrizproyecto es ProjectMatrix convertido a Matriz3D
+            Point point2 = new Point(new Matriz3D().mult(matrizproyecto, puntosF.get(arista[1])));
+            g.drawLine(point1, point2, g);
 
-
-            g.drawLine(x0, y0, x1, y1);
 
         }
 
@@ -199,7 +206,7 @@ public class Main extends JPanel implements KeyListener{
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Lines");
+        JFrame frame = new JFrame("3DObj");
 //      Lines frame = new Lines();
 //      frame.addKeyListener(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
