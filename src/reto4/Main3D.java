@@ -24,8 +24,8 @@ public class Main3D extends JPanel implements KeyListener{
     int rZ = 0;
     int xO = 50;
     int yO = 30;
-    int zO = 10;
-    int d = 250;
+    int zO = -110;
+    int d = 50;
 
     FileReader fileReader = new FileReader();
 
