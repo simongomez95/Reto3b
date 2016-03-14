@@ -1,6 +1,6 @@
 package reto4;
 
-import reto3b.Punto2Dh;
+import reto3b.Punto3Dh;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class FileReader {
 
-    private static String fileName = "objeto.txt";
+    private static String fileName = "choco3D.txt";
     private String line = null;
 
     private File file;
@@ -21,7 +21,7 @@ public class FileReader {
     private BufferedReader br;
 
     private List<int[]> listaAristas = new LinkedList<int[]>();
-    private List<Punto2Dh> listaPuntos = new LinkedList<Punto2Dh>();
+    private List<Punto3Dh> listaPuntos = new LinkedList<Punto3Dh>();
 
     public FileReader () {
 
@@ -49,7 +49,7 @@ public class FileReader {
             numeroPuntos = Integer.parseInt(br.readLine());
             for (int i = 0; i < numeroPuntos; i++) {
                 punto = br.readLine().split(" ");
-                listaPuntos.add(new Punto2Dh(Double.parseDouble(punto[0]), Double.parseDouble(punto[1])));
+                listaPuntos.add(new Punto3Dh(Double.parseDouble(punto[0]), Double.parseDouble(punto[1]), Double.parseDouble(punto[2])));
 
             }
         } catch (IOException e) {
@@ -74,7 +74,7 @@ public class FileReader {
 
     }
 
-    public List<Punto2Dh> getPuntos() {
+    public List<Punto3Dh> getPuntos() {
         return listaPuntos;
     }
 

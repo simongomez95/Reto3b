@@ -38,6 +38,8 @@ public class Main3D extends JPanel implements KeyListener{
 
         Graphics2D g2d = (Graphics2D) g;
 
+        dibujarObjeto(g2d);
+
     }
 
     public void transformar(){
@@ -135,10 +137,10 @@ public class Main3D extends JPanel implements KeyListener{
         transformar();
 
         for(int[] arista : aristasF){
-            x0 = (int) puntos.get(arista[0].getX());
-            y0 = (int) puntos.get(arista[0].getY());
-            x1 = (int) puntos.get(arista[0].getX());
-            y1 = (int) puntos.get(arista[0].getY());
+            x0 = (int) puntos.get(arista[0]).getX();
+            y0 = (int) puntos.get(arista[0]).getY();
+            x1 = (int) puntos.get(arista[1]).getX();
+            y1 = (int) puntos.get(arista[1]).getY();
 
             g2d.drawLine(x0,y0,x1,y1);
         }
@@ -243,4 +245,18 @@ public class Main3D extends JPanel implements KeyListener{
         repaint();
     }
 
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Lines");
+//      Lines frame = new Lines();
+//      frame.addKeyListener(frame);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Main3D main = new Main3D();
+        frame.add(main);
+        frame.addKeyListener(main);
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
 }
+
+
