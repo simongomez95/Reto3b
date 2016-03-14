@@ -42,6 +42,7 @@ public class Punto3Dh {
             x = x/w;
             y = y/w;
             z = z/w;
+            w = 1;
         }
 
     }

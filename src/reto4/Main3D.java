@@ -25,7 +25,8 @@ public class Main3D extends JPanel implements KeyListener{
     int xO = 50;
     int yO = 30;
     int zO = -110;
-    int d = 50;
+    int d = 250;
+    Color ran;
 
     FileReader fileReader = new FileReader();
 
@@ -37,7 +38,7 @@ public class Main3D extends JPanel implements KeyListener{
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-
+        this.setBackground(Color.BLACK);
         dibujarObjeto(g2d);
 
     }
@@ -113,17 +114,17 @@ public class Main3D extends JPanel implements KeyListener{
         for(int i = 0; i < puntosF.size();i++){
             Punto3Dh p1 = puntosF.get(i);
 
+            p1 = p1.transf(perspectiva,p1);
+            p1.normalize();
             p1 = p1.transf(origen1,p1);
             p1 = p1.transf(rotacionX,p1);
             p1 = p1.transf(rotacionY,p1);
             p1 = p1.transf(rotacionZ,p1);
             p1 = p1.transf(traslacion,p1);
             p1 = p1.transf(escala,p1);
-            p1 = p1.transf(perspectiva,p1);
             p1 = p1.transf(origen2,p1);
 
 
-            p1.normalize();
             puntos.add(i,p1);
         }
     }
@@ -142,6 +143,7 @@ public class Main3D extends JPanel implements KeyListener{
             x1 = (int) puntos.get(arista[1]).getX();
             y1 = (int) puntos.get(arista[1]).getY();
 
+            g2d.setColor(ran);
             g2d.drawLine(x0,y0,x1,y1);
         }
     }
@@ -239,9 +241,33 @@ public class Main3D extends JPanel implements KeyListener{
             s += 0.2;
 
         }
+
+        if(ke.getKeyCode() == KeyEvent.VK_ENTER){
+            //for(int i = 0 ; i<1000;i++){
+                int r1 =(int)(Math.random()*4);
+                switch (r1){
+                    case 1:
+                        rX +=10;
+                        repaint();
+                        break;
+
+                    case 2:
+                        rY += 10;
+                        repaint();
+                        break;
+
+                    case 3:
+                        rZ +=10;
+                        repaint();
+                        break;
+                }
+            }
+        //}
     }
 
     public void keyTyped(KeyEvent ke) {
+        ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+        System.out.println(ran.toString());
         repaint();
     }
 
@@ -256,6 +282,7 @@ public class Main3D extends JPanel implements KeyListener{
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 }
 
