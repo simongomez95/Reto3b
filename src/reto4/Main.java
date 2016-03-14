@@ -26,7 +26,6 @@ public class Main extends JPanel implements KeyListener{
 
     List<Punto2Dh> puntosF = fileReader.getPuntos();
     List<int[]> aristasF = fileReader.getAristas();
-
     List<Punto2Dh> puntos = new LinkedList<>();
 
     public void paintComponent(Graphics g) {

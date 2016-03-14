@@ -22,17 +22,28 @@ public class Punto3Dh {
         z = z1;
         w = 1;
     }
-    
-    public Punto3Dh transf(Matriz3D m1){
-        Punto3Dh pR = this;
+
+    public Punto3Dh transf(Matriz3D m1, Punto3Dh p){
         double[][] m = m1.getMatriz();
-        
-        pR.setX(x*m[0][0] + y*m[0][1] + z*m[0][2] + w*m[0][3]);
-        pR.setY(x*m[1][0] + y*m[1][1] + z*m[1][2] + w*m[1][3]);
-        pR.setZ(x*m[2][0] + y*m[2][1] + z*m[2][2] + w*m[2][3]);
-        pR.setW(x*m[3][0] + y*m[3][1] + z*m[3][2] + w*m[3][3]);
-        
-        return pR;
+        double[] point={p.getX(), p.getY(),p.getZ(), p.getW()};
+        double[] res={0, 0, 0, 0};
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                res[i] += m[i][j]*point[j];
+            }
+        }
+        return new Punto3Dh(res[0], res[1], res[2]);
+    }
+
+    public void normalize(){
+        if(w == 1){
+            return;
+        }else{
+            x = x/w;
+            y = y/w;
+            z = z/w;
+        }
+
     }
 
     public double getX() {

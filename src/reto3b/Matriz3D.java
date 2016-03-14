@@ -15,22 +15,6 @@ public class Matriz3D {
     
     public Matriz3D(){
         matriz = new double[4][4];
-        matriz[0][0] = 2;
-        matriz[0][1] = 2;
-        matriz[1][0] = 3;
-        matriz[1][1] = 3;
-        matriz[2][0] = 2;
-        matriz[2][1] = 2;
-        matriz[2][2] = 3;
-        matriz[0][2] = 3;
-        matriz[1][2] = 3;
-        matriz[0][3] = 1;
-        matriz[1][3] = 1;
-        matriz[2][3] = 1;
-        matriz[3][3] = 1;
-        matriz[3][0] = 1;
-        matriz[3][1] = 1;
-        matriz[3][2] = 1;
     }
     
     public double[][] mult(Matriz3D m1){
@@ -48,6 +32,14 @@ public class Matriz3D {
         }
         
         return mR;
+    }
+
+    public void setMatriz(double[][] m){
+        matriz = m;
+    }
+
+    public void setMatrizVal(int i, int j, double val){
+        matriz[i][j] = val;
     }
     
     public double[][] transp(){
