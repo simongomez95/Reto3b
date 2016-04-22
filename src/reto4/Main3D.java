@@ -176,7 +176,7 @@ public class Main3D extends JPanel implements KeyListener{
         }
 
         if(ke.getKeyCode() == KeyEvent.VK_X) {
-            System.out.println("key pressed D");
+            System.out.println("key pressed X");
             dZ -= 5;
         }
 
