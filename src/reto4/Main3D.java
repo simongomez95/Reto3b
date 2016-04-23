@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by lope on 3/11/2016.
  */
 
-public class Main3D extends JPanel implements KeyListener{
+public class Main3D extends JPanel implements KeyListener {
 
     double s = 1;
     int dX = 0;
@@ -30,20 +31,36 @@ public class Main3D extends JPanel implements KeyListener{
 
     FileReader fileReader = new FileReader();
 
+
+
+
+
+    /*
     List<Punto3Dh> puntosF = fileReader.getPuntos();
     List<int[]> aristasF = fileReader.getAristas();
+    */
+
     List<Punto3Dh> puntos = new LinkedList<>();
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        Objeto3D[] objetos;
+        try {
+            objetos = fileReader.leerObjetos();
+            super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
-        this.setBackground(Color.BLACK);
-        dibujarObjeto(g2d);
+            Graphics2D g2d = (Graphics2D) g;
+            this.setBackground(Color.BLACK);
+            for (int i = 0; i < objetos.length; i++) {
+                dibujarObjeto(g2d, objetos[i]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
-    public void transformar(){
+    /*public void transformar(){
         Matriz3D origen1 = new Matriz3D();
         Matriz3D origen2 = new Matriz3D();
         Matriz3D rotacionX = new Matriz3D();
@@ -127,15 +144,18 @@ public class Main3D extends JPanel implements KeyListener{
 
             puntos.add(i,p1);
         }
-    }
+    }*/
 
-    public void dibujarObjeto(Graphics2D g2d){
+    public void dibujarObjeto(Graphics2D g2d, Objeto3D obj){
         int x0;
         int y0;
         int x1;
         int y1;
+        List<Punto3Dh> puntos = obj.getPuntos();
+        List<int[]> aristasF = obj.getAristas();
 
-        transformar();
+
+        //transformar();
 
         for(int[] arista : aristasF){
             x0 = (int) puntos.get(arista[0]).getX();
@@ -150,11 +170,14 @@ public class Main3D extends JPanel implements KeyListener{
 
 
 
+    /*
     public void keyReleased(KeyEvent ke) {
         repaint();
     }
+    */
 
-    public void keyPressed(KeyEvent ke) {
+
+    /*public void keyPressed(KeyEvent ke) {
         if(ke.getKeyCode() == KeyEvent.VK_W) {
             System.out.println("key pressed W");
             dY -= 5;
@@ -269,7 +292,7 @@ public class Main3D extends JPanel implements KeyListener{
         ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
         System.out.println(ran.toString());
         repaint();
-    }
+    }*/
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Lines");

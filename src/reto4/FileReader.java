@@ -34,14 +34,15 @@ public class FileReader {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        leerObjeto();
+        //leerObjeto(); Esto es de cuando leerObjeto era un void
 
 
     }
 
-    private Objeto3D[] leerObjeto() throws IOException {
+    public Objeto3D[] leerObjetos() throws IOException {
 
         int numeroPuntos = 0;
+        int numeroAristas = 0;
         int numeroObjetos = 0;
 
 
@@ -67,7 +68,7 @@ public class FileReader {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            int numeroAristas = 0;
+
             try {
                 numeroAristas = Integer.parseInt(br.readLine());
 
@@ -91,12 +92,12 @@ public class FileReader {
 
     }
 
-    public List<Punto3Dh> getPuntos() {
+    /*public List<Punto3Dh> getPuntos() {
         return listaPuntos;
     }
 
     public List<int[]> getAristas() {
         return listaAristas;
-    }
+    }*/
 
 }

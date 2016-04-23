@@ -14,4 +14,12 @@ public class Objeto3D {
         listaAristas = aristas;
         listaPuntos = puntos;
     }
+
+    public List<Punto3Dh> getPuntos() {
+        return listaPuntos;
+    }
+
+    public List<int[]> getAristas() {
+        return listaAristas;
+    }
 }
