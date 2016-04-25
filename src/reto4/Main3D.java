@@ -29,7 +29,9 @@ public class Main3D extends JPanel { //implements KeyListener {
     int d = 250;
     Color ran;
 
-    FileReader fileReader = new FileReader();
+    static FileReader fileReader = new FileReader();
+
+    static Objeto3D[] objetos;
 
 
 
@@ -65,19 +67,14 @@ public class Main3D extends JPanel { //implements KeyListener {
     }
 
     public void paintComponent(Graphics g) {
-        Objeto3D[] objetos;
-        try {
-            objetos = fileReader.leerObjetos();
-            super.paintComponent(g);
 
-            Graphics2D g2d = (Graphics2D) g;
-            this.setBackground(Color.BLACK);
-            depthSort(objetos);
-            for (int i = 0; i < objetos.length; i++) {
-                dibujarObjeto(g2d, objetos[i]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        super.paintComponent(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+        this.setBackground(Color.BLACK);
+        depthSort(objetos);
+        for (int i = 0; i < objetos.length; i++) {
+            dibujarObjeto(g2d, objetos[i]);
         }
 
 
@@ -176,6 +173,8 @@ public class Main3D extends JPanel { //implements KeyListener {
         int y1;
         List<Punto3Dh> puntos = obj.getPuntos();
         List<int[]> aristasF = obj.getAristas();
+
+        ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 
 
         //transformar();
@@ -318,6 +317,11 @@ public class Main3D extends JPanel { //implements KeyListener {
     }*/
 
     public static void main(String[] args) {
+        try {
+            objetos = fileReader.leerObjetos();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JFrame frame = new JFrame("Lines");
 //      Lines frame = new Lines();
 //      frame.addKeyListener(frame);
