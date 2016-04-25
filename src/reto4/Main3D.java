@@ -14,7 +14,7 @@ import java.util.List;
  * Created by lope on 3/11/2016.
  */
 
-public class Main3D extends JPanel implements KeyListener {
+public class Main3D extends JPanel { //implements KeyListener {
 
     double s = 1;
     int dX = 0;
@@ -42,6 +42,28 @@ public class Main3D extends JPanel implements KeyListener {
 
     List<Punto3Dh> puntos = new LinkedList<>();
 
+    public static void depthSort(Objeto3D[] obj)
+    {
+        int j;
+        boolean flag = true;   // set flag to true to begin first pass
+        Objeto3D temp;   //holding variable
+
+        while ( flag )
+        {
+            flag= false;    //set flag to false awaiting a possible swap
+            for( j=0;  j < obj.length -1;  j++ )
+            {
+                if ( obj[ j ].getzMenor() < obj[j+1].getzMenor() )   // change to > for ascending sort
+                {
+                    temp = obj[ j ];                //swap elements
+                    obj[ j ] = obj[ j+1 ];
+                    obj[ j+1 ] = temp;
+                    flag = true;              //shows a swap occurred
+                }
+            }
+        }
+    }
+
     public void paintComponent(Graphics g) {
         Objeto3D[] objetos;
         try {
@@ -50,6 +72,7 @@ public class Main3D extends JPanel implements KeyListener {
 
             Graphics2D g2d = (Graphics2D) g;
             this.setBackground(Color.BLACK);
+            depthSort(objetos);
             for (int i = 0; i < objetos.length; i++) {
                 dibujarObjeto(g2d, objetos[i]);
             }
@@ -301,7 +324,7 @@ public class Main3D extends JPanel implements KeyListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Main3D main = new Main3D();
         frame.add(main);
-        frame.addKeyListener(main);
+        //frame.addKeyListener(main);
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
