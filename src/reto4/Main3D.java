@@ -89,9 +89,9 @@ public class Main3D extends JPanel implements KeyListener {
         coll = false;
 
         for(Punto3Dh pto : obj1.getPuntos()) {
-            if(pto.getX() > obj2.getxMenor() && pto.getX() < obj2.getxMayor()) {
-                if (pto.getY() > obj2.getyMenor() && pto.getY() < obj2.getyMayor()) {
-                    if (pto.getZ() > obj2.getzMenor() && pto.getZ() < obj2.getzMayor()) {
+            if(pto.getX() >= obj2.getxMenor() && pto.getX() <= obj2.getxMayor()) {
+                if (pto.getY() >= obj2.getyMenor() && pto.getY() <= obj2.getyMayor()) {
+                    if (pto.getZ() >= obj2.getzMenor() && pto.getZ() <= obj2.getzMayor()) {
                         coll = true;
                     }
                 }
@@ -99,14 +99,16 @@ public class Main3D extends JPanel implements KeyListener {
         }
 
         for(Punto3Dh pto : obj2.getPuntos()) {
-            if(pto.getX() > obj1.getxMenor() && pto.getX() < obj1.getxMayor()) {
-                if (pto.getY() > obj1.getyMenor() && pto.getY() < obj1.getyMayor()) {
-                    if (pto.getZ() > obj1.getzMenor() && pto.getZ() < obj1.getzMayor()) {
+            if(pto.getX() >= obj1.getxMenor() && pto.getX() <= obj1.getxMayor()) {
+                if (pto.getY() >= obj1.getyMenor() && pto.getY() <= obj1.getyMayor()) {
+                    if (pto.getZ() >= obj1.getzMenor() && pto.getZ() <= obj1.getzMayor()) {
                         coll = true;
                     }
                 }
             }
         }
+
+        System.out.println(coll);
 
 
 
@@ -212,6 +214,8 @@ public class Main3D extends JPanel implements KeyListener {
         if (obj==objetos[0]) {
             obj = transformar(obj);
         }
+
+        collision(objetos[0], objetos[1]);
 
         if (coll) {
             colorColl = Color.RED;
