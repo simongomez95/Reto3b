@@ -23,7 +23,7 @@ public class Objeto3D {
         listaPuntos = puntos;
 
         xMenor = puntos.get(0).getX();
-        yMenor = puntos.get(0).getY();
+        yMenor = puntos.get(2).getY();
         zMenor = puntos.get(0).getZ();
 
         xMayor = puntos.get(0).getX();
@@ -38,6 +38,7 @@ public class Objeto3D {
             }
             if (punto.getY() < yMenor) {
                 yMenor = punto.getY();
+                System.out.println("ymenor: "+yMenor);
             }
             if (punto.getZ() < zMenor) {
                 zMenor = punto.getZ();
