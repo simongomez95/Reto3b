@@ -209,14 +209,14 @@ public class Main3D extends JPanel implements KeyListener {
         int x1;
         int y1;
 
+        if (obj==objetos[0]) {
+            obj = transformar(obj);
+        }
+
         if (coll) {
             colorColl = Color.RED;
         } else {
             colorColl = Color.BLUE;
-        }
-
-        if (obj==objetos[0]) {
-            obj = transformar(obj);
         }
 
         List<Punto3Dh> puntos = obj.getPuntos();
