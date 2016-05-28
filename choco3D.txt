@@ -67,3 +67,12 @@
 1 9
 2 10
 3 11
+
+#FORMATO:
+numero de objetos
+(para cada objeto)
+numero de puntos
+puntos
+numero de aristas
+aristas
+(/para cada objeto)

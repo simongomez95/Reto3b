@@ -27,7 +27,9 @@ public class Main3D extends JPanel implements KeyListener {
     int yO = 30;
     int zO = -110;
     int d = 250;
-    Color ran;
+    Color colorColl;
+
+    static boolean coll = false;
 
     static FileReader fileReader = new FileReader();
 
@@ -72,9 +74,9 @@ public class Main3D extends JPanel implements KeyListener {
 
         Graphics2D g2d = (Graphics2D) g;
         this.setBackground(Color.BLACK);
+
         depthSort(objetos);
 
-        objetos[2] = transformar(objetos[0]);
 
         for (int i = 0; i < objetos.length; i++) {
             dibujarObjeto(g2d, objetos[i]);
@@ -83,7 +85,35 @@ public class Main3D extends JPanel implements KeyListener {
 
     }
 
-    public Objeto3D transformar(Objeto3D obj){
+    void collision(Objeto3D obj1, Objeto3D obj2) {
+        coll = false;
+
+        for(Punto3Dh pto : obj1.getPuntos()) {
+            if(pto.getX() > obj2.getxMenor() && pto.getX() < obj2.getxMayor()) {
+                if (pto.getY() > obj2.getyMenor() && pto.getY() < obj2.getyMayor()) {
+                    if (pto.getZ() > obj2.getzMenor() && pto.getZ() < obj2.getzMayor()) {
+                        coll = true;
+                    }
+                }
+            }
+        }
+
+        for(Punto3Dh pto : obj2.getPuntos()) {
+            if(pto.getX() > obj1.getxMenor() && pto.getX() < obj1.getxMayor()) {
+                if (pto.getY() > obj1.getyMenor() && pto.getY() < obj1.getyMayor()) {
+                    if (pto.getZ() > obj1.getzMenor() && pto.getZ() < obj1.getzMayor()) {
+                        coll = true;
+                    }
+                }
+            }
+        }
+
+
+
+
+    }
+
+    Objeto3D transformar(Objeto3D obj){
         Matriz3D origen1 = new Matriz3D();
         Matriz3D origen2 = new Matriz3D();
         Matriz3D rotacionX = new Matriz3D();
@@ -168,7 +198,7 @@ public class Main3D extends JPanel implements KeyListener {
             puntos.add(i,p1);
         }
 
-        List<int[]> aristasNew = new LinkedList<int[]>();
+        List<int[]> aristasNew = obj.getAristas();
 
         return new Objeto3D(aristasNew, puntos);
     }
@@ -178,10 +208,21 @@ public class Main3D extends JPanel implements KeyListener {
         int y0;
         int x1;
         int y1;
+
+        if (coll) {
+            colorColl = Color.RED;
+        } else {
+            colorColl = Color.BLUE;
+        }
+
+        if (obj==objetos[0]) {
+            obj = transformar(obj);
+        }
+
         List<Punto3Dh> puntos = obj.getPuntos();
         List<int[]> aristasF = obj.getAristas();
 
-        ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+        //ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
 
 
 
@@ -191,7 +232,7 @@ public class Main3D extends JPanel implements KeyListener {
             x1 = (int) puntos.get(arista[1]).getX();
             y1 = (int) puntos.get(arista[1]).getY();
 
-            g2d.setColor(ran);
+            g2d.setColor(colorColl);
             g2d.drawLine(x0,y0,x1,y1);
         }
     }
@@ -317,8 +358,8 @@ public class Main3D extends JPanel implements KeyListener {
     }
 
     public void keyTyped(KeyEvent ke) {
-        ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
-        System.out.println(ran.toString());
+        //ran = new Color((int)(Math.random()*256),(int)(Math.random()*256),(int)(Math.random()*256));
+        //System.out.println(ran.toString());
         repaint();
     }
 
