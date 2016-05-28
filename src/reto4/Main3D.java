@@ -93,7 +93,6 @@ public class Main3D extends JPanel implements KeyListener {
         for(Punto3Dh pto : obj1.getPuntos()) {
             if(pto.getX() >= obj2.getxMenor() && pto.getX() <= obj2.getxMayor()) {
                 if (pto.getY() >= obj2.getyMenor() && pto.getY() <= obj2.getyMayor()) {
-                    System.out.println("colision en y");
                     if (pto.getZ() >= obj2.getzMenor() && pto.getZ() <= obj2.getzMayor()) {
                         coll = true;
                     }
@@ -104,7 +103,6 @@ public class Main3D extends JPanel implements KeyListener {
         for(Punto3Dh pto : obj2.getPuntos()) {
             if(pto.getX() >= obj1.getxMenor() && pto.getX() <= obj1.getxMayor()) {
                 if (pto.getY() >= obj1.getyMenor() && pto.getY() <= obj1.getyMayor()) {
-                    System.out.println(pto.getY() + "colision en y 2" + obj1.getyMayor() + " " +obj1.getyMenor());
                     if (pto.getZ() >= obj1.getzMenor() && pto.getZ() <= obj1.getzMayor()) {
                         coll = true;
                     }
@@ -121,7 +119,7 @@ public class Main3D extends JPanel implements KeyListener {
 
     Objeto3D transformar(Objeto3D obj){
 
-        List<Punto3Dh> puntos = new LinkedList<Punto3Dh>(ss);
+        List<Punto3Dh> puntos = new LinkedList<Punto3Dh>();
         Matriz3D origen1 = new Matriz3D();
         Matriz3D origen2 = new Matriz3D();
         Matriz3D rotacionX = new Matriz3D();
@@ -220,8 +218,6 @@ public class Main3D extends JPanel implements KeyListener {
         if (obj==objetos[0]) {
             obj = transformar(obj);
             coll = false;
-
-            System.out.println("obj" + obj.getyMenor() + " " + obj.getyMayor());
             collision(obj, objetos[1]);
         }
 

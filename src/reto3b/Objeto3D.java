@@ -38,7 +38,6 @@ public class Objeto3D {
             }
             if (punto.getY() < yMenor) {
                 yMenor = punto.getY();
-                System.out.println("ymenor: "+yMenor);
             }
             if (punto.getZ() < zMenor) {
                 zMenor = punto.getZ();
