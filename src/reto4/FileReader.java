@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class FileReader {
 
-    private static String fileName = "choco3D.txt";
+    private static String fileName = "AABB.txt";
     private String line = null;
 
     private File file;

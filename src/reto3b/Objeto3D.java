@@ -22,6 +22,46 @@ public class Objeto3D {
         listaAristas = aristas;
         listaPuntos = puntos;
 
+
+        if(puntos.size()==2) {
+            //puntos tapa de arriba
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(1).getX(), listaPuntos.get(0).getY(), listaPuntos.get(0).getZ()));
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(1).getX(), listaPuntos.get(0).getY(), listaPuntos.get(1).getZ()));
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(0).getX(), listaPuntos.get(0).getY(), listaPuntos.get(1).getZ()));
+
+            //puntos tapa de abajo
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(0).getX(), listaPuntos.get(1).getY(), listaPuntos.get(1).getZ()));
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(0).getX(), listaPuntos.get(1).getY(), listaPuntos.get(0).getZ()));
+            listaPuntos.add(new Punto3Dh(listaPuntos.get(1).getX(), listaPuntos.get(1).getY(), listaPuntos.get(0).getZ()));
+
+            //aristas
+            int[] a1 = {0, 2};
+            int[] a2 = {2, 3};
+            int[] a3 = {3, 4};
+            int[] a4 = {4, 0};
+            int[] a5 = {6, 7};
+            int[] a6 = {7, 1};
+            int[] a7 = {1, 5};
+            int[] a8 = {5, 6};
+            int[] a9 = {0, 6};
+            int[] a10 = {2, 7};
+            int[] a11 = {3, 1};
+            int[] a12 = {4, 5};
+            listaAristas.add(a1);
+            listaAristas.add(a2);
+            listaAristas.add(a3);
+            listaAristas.add(a4);
+            listaAristas.add(a5);
+            listaAristas.add(a6);
+            listaAristas.add(a7);
+            listaAristas.add(a8);
+            listaAristas.add(a9);
+            listaAristas.add(a10);
+            listaAristas.add(a11);
+            listaAristas.add(a12);
+        }
+
+
         xMenor = puntos.get(0).getX();
         yMenor = puntos.get(2).getY();
         zMenor = puntos.get(0).getZ();
